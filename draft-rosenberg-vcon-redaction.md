@@ -19,8 +19,8 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "TODO - Your title"
-abbrev: "TODO - Abbreviation"
+title: "Use Cases and Requirements for Redaction in VCON"
+abbrev: "VCON Redaction"
 category: info
 
 docname: draft-todo-yourname-protocol-latest
