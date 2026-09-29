@@ -261,8 +261,8 @@ Table of Contents
    user's utterance is removed, the conversation would clearly sound
    like it was missing something.  For example -
 
-   AI Agent: What is your social security number?  AI Agent: Got it,
-   thanks
+   AI Agent: What is your social security number?
+   AI Agent: Got it, thanks
 
    A user listening to this audio sequence would know something was
    missing, making the redaction detectable.
@@ -306,11 +306,12 @@ Table of Contents
    for downstream troubleshooting and management purposes.  Consider
    this conversation -
 
-   AI Agent: How can I help you today?  User: Yeah, so my name is
-   Jonathan Rosenberg and my account number is 12345.  I ordered a
-   widget 2000 like a month back and it still hasn't shown up.  The
-   website is showing it shipped but it has said that for a while and
-   there is no Fedex tracking number.  What's going on?
+   AI Agent: How can I help you today?
+   User: Yeah, so my name is Jonathan Rosenberg and my account number
+   is 12345. I ordered a widget 2000 like a month back and it still
+   hasn't shown up. The website is showing it shipped but it has
+   said that for a while and there is no Fedex tracking number.
+   What's going on?
 
    In this case, the user turn contains PII information (the user's name
    and account number), but it also contains critical information - the
@@ -363,8 +364,9 @@ Table of Contents
    It's main drawback is that, as a positional indicator, it can lead to
    false positives.  Consider the following interesting conversation -
 
-   AI Agent: What is your three letter confirmation code?  User: Yes, it
-   is XXX.  AI Agent: Thanks, let me look it up.
+   AI Agent: What is your three letter confirmation code?
+   User: Yes, it is XXX.
+   AI Agent: Thanks, let me look it up.
 
    Here is the interesting question - was the user's confirmation code
    actually XXX, or was it something else, and there was a redaction
@@ -374,9 +376,9 @@ Table of Contents
    where the redaction occurred over text that was the result of speech
    recognition.  Consider this example -
 
-   AI Agent: What is your three letter confirmation code?  User: Hang
-   on, umm, OK.  Its XXX, then YKZ.  AI Agent: Thanks, let me look it
-   up.
+   AI Agent: What is your three letter confirmation code?
+   User: Hang on, umm, OK. Its XXX, then YKZ.
+   AI Agent: Thanks, let me look it up.
 
    In this case, is the user's confirmation code XXXYKZ, or has some
    kind of partial redaction taken place?  There is no way to know.
@@ -385,8 +387,8 @@ Table of Contents
    lead to confusion if the participants in a conversation actually use
    that word!  Consider this conversation -
 
-   User 1: Did you try reading the document?  User 2: Yes I did, but the
-   account number was redacted.
+   User 1: Did you try reading the document?
+   User 2: Yes I did, but the account number was redacted.
 
    In this conversation - did user 2 speak the account number, but then
    it was subsequently redacted?  Or did they say the word "redacted"?
