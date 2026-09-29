@@ -115,8 +115,10 @@ Full object removal only makes sense if the VCON was structured as a sequence of
 Full object removal may result in a "hole" in the sequence of dialogs where no audiovisual information is present, making it potentially detectable. Whether it is detectable or not depends on how the dialogs were structured and on the nature of the conversation being captured. If the VCON had a set of dialogs, each representing a one-minute interval of audio mixed from all participants, then removing of one of the dialogs results in a VCON in which redaction is easily detectable - there will be a notable silence in the audio. However, if the VCON had a series of dialogs, each representing the audio contribution of a single speaker for a one-minute portion of time (or perhaps a single turn), then it might be detectable, or might not. If it was a conversation between a user and an AI agent, and the user's utterance is removed, the conversation would clearly sound like it was missing something. For example -
 
 
+~~~
 AI Agent: What is your social security number?
 AI Agent: Got it, thanks
+~~~
 
 A user listening to this audio sequence would know something was missing, making the redaction detectable.
 
@@ -134,8 +136,14 @@ Unlike full dialog object removal, there is no change in the index of the dialog
 
 Also unlike full dialog object removal, content removal can be accompanied by positional indicators (if the start and duration elements are preserved) and participant indicators (if the parties element is preserved). This makes this approach useful for many applications. However, it has a hard requirement that the VCON be structured in a way facilitating removal of content from a single dialog. For calls between a consumer and an AI agent, it would require per speaker, per-turn dialog elements. Even then, redaction of an entire turn might cause loss of information which is desirable for downstream troubleshooting and management purposes. Consider this conversation -
 
+~~~
 AI Agent: How can I help you today?
-User: Yeah, so my name is Jonathan Rosenberg and my account number is 12345. I ordered a widget 2000 like a month back and it still hasn't shown up. The website is showing it shipped but it has said that for a while and there is no Fedex tracking number. What's going on?
+User: Yeah, so my name is Jonathan Rosenberg and my account number
+is 12345. I ordered a widget 2000 like a month back and it still
+hasn't shown up. The website is showing it shipped but it has
+said that for a while and there is no Fedex tracking number.
+What's going on?
+~~~
 
 In this case, the user turn contains PII information (the user's name and account number), but it also contains critical information - the intent of the caller and context of the removal. If the dialog content is removed, the audio is lost. Now, this might be acceptable if there was an accompanying transcript in an analysis object. The entire audio turn could be redacted, and then just the two PII elements from the transcript. The alternative is to perform content substitution, noted below.
 
@@ -162,24 +170,30 @@ Well Known Character substitution is effective and easy to implement. It is dete
 
 It's main drawback is that, as a positional indicator, it can lead to false positives. Consider the following interesting conversation -
 
+~~~
 AI Agent: What is your three letter confirmation code?
 User: Yes, it is XXX.
 AI Agent: Thanks, let me look it up.
+~~~
 
 Here is the interesting question - was the user's confirmation code actually XXX, or was it something else, and there was a redaction operation which substituted the real confirmation code?
 
 This perhaps seems contrived, but it is even more complex in cases where the redaction occurred over text that was the result of speech recognition. Consider this example -
 
+~~~
 AI Agent: What is your three letter confirmation code?
 User: Hang on, umm, OK. Its XXX, then YKZ.
 AI Agent: Thanks, let me look it up.
+~~~
 
 In this case, is the user's confirmation code XXXYKZ, or has some kind of partial redaction taken place? There is no way to know.
 
 This is perhaps improved by using a word like REDACTED, but again can lead to confusion if the participants in a conversation actually use that word! Consider this conversation -
 
+~~~
 User 1: Did you try reading the document?
 User 2: Yes I did, but the account number was redacted.
+~~~
 
 In this conversation - did user 2 speak the account number, but then it was subsequently redacted? Or did they say the word "redacted"?
 
